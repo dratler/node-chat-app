@@ -12,6 +12,16 @@
 
 <body>
   <p>this is my page</p>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    let socket = io();
+    socket.on('connect',()=>{
+      console.log('new client coneection ...');
+    });
+    socket.on('disconnect',()=>{
+      console.log('client connection lost ...');
+    });
+  </script>
 </body>
 
 </html>

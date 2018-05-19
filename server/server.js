@@ -1,21 +1,27 @@
 const config = require('./config/config');
 const express = require('express');
+const http = require('http');
 const path = require('path');
+const socketIO = require('socket.io');
 
 const publicPath = path.join(__dirname, '../public');
-
 const port = process.env.PORT;
+
 let app = express();
-app.use();
+let server = http.createServer(app);
+let io = socketIO(server);
 
-const BASE_PATH = '/';
+app.use(express.static(publicPath));
 
-app.get(BASE_PATH, (req, res) => {
-  res.send({ text: 'hello world'});
+io.on('connection', (socket) => {
+  console.log('now connection');
+  socket.on('disconnect', () => {
+    console.log('connection lost');
+  });
 });
 
-app.listen(port, () => {
+
+
+server.listen(port, () => {
   console.log(`server is starting on port ${port}`)
 });
-
-module.exports = {app};
