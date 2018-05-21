@@ -1,18 +1,6 @@
 let socket = io();
 socket.on('connect', function () {
   console.log('new client coneection ...');
-
- //Send server the mail
-  socket.emit('createEmail', {
-    to: 'moshe@fake.com',
-    subject: 'this is a fake mail',
-    text: 'this is a fake content '
-  });
-
-  socket.emit('createMessage', {
-    from: 'client',
-    text:'this is client message'
-  });
 });
 
 socket.on('disconnect', function () {

@@ -16,30 +16,18 @@ app.use(express.static(publicPath));
 io.on('connection', (socket) => {
   console.log('now connection');
 
+  socket.on('createMessage', (message) => {
+    console.log(`createMessage ${JSON.stringify(message, undefined, 2)}`);
+    io.emit('newMessage', {
+      from: message.from,
+      text: message.text,
+      createdAt:new Date().getTime()
+    });
+  });
+
   socket.on('disconnect', () => {
     console.log('connection lost');
   });
- //Server send custom requests
-  socket.emit('newEmail', {
-    to: 'mosh2e@fake.com',
-    subject: 'this is a fake mail 2',
-    text: 'this is a fake content 2 '
-  });
-
-  socket.emit('newMessage', {
-    from: 'server',
-    text: 'this is newMessage',
-    date: new Date().getUTCDate()
-  });
- //Server listen to cutom request from client
-  socket.on( 'createEmail', (email) => {
-    console.log(`createEmail ${JSON.stringify(email,undefined,2)}`);
-  });
-
-  socket.on('createMessage', (message) => {
-    console.log(`createMessage ${JSON.stringify(message,undefined,2)}`);
-  });
-
 });
 
 server.listen(port, () => {
