@@ -20,14 +20,10 @@ io.on('connection', (socket) => {
   socket.emit('newMessage',generateMessage('Admin', 'wellcome to chat room') );
   socket.broadcast.emit('newMessage',generateMessage('Admin','new User joined chat room'));
 
-  socket.on('createMessage', (message) => {
+  socket.on('createMessage', (message, callback) => {
     console.log(`createMessage ${JSON.stringify(message, undefined, 2)}`);
     io.emit('newMessage', generateMessage(message.from,message.text));
-    // socket.broadcast.emit('newMessage', {
-    //   from: message.from,
-    //   text: message.text,
-    //   createdAt:new Date().getTime()
-    // });
+    callback({isOk:true});
   });
 
   socket.on('disconnect', () => {
