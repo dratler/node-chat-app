@@ -16,19 +16,43 @@
     <div id="users"></div>
   </div>
   <div class="chat__main">
-      <ol id="messages" class="chat__messages"></ol>
+    <ol id="messages" class="chat__messages"></ol>
     <div class="chat__footer">
       <form id="message-form">
-          <input name="message" type="text" placeholder="message" autofocus autocomplete="off" />
-          <button>Send</button>
-        </form>
-        <button id="set-location">Set Location</button>
-      </div>
+        <input name="message" type="text" placeholder="message" autofocus autocomplete="off" />
+        <button>Send</button>
+      </form>
+      <button id="set-location">Set Location</button>
+    </div>
   </div>
+
+  <script id="message-template" type="text/template">
+    <li class="message">
+      <div class="message__title">
+        <h4>{{user}}</h4>
+        <span>{{time}} </span>
+      </div>
+      <div class="message__body">
+        <p>{{text}}</p>
+      </div>
+    </li>
+  </script>
+  <script id="location-message-template" type="text/template">
+    <li class="message">
+      <div class="message__title">
+        <h4>{{user}}</h4>
+        <span>{{time}} </span>
+      </div>
+      <div class="message__body">
+        <p><a href={{url}} target="_blank">my current location</a></p>
+      </div>
+    </li>
+  </script>
 
   <script src="/socket.io/socket.io.js"></script>
   <script src="/js/lib/jquery-3.3.1.min.js"></script>
   <script src="/js/lib/moment.js"></script>
+  <script src="/js/lib/mustache.js"></script>
   <script src="/js/index.js"></script>
 </body>
 
