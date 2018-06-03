@@ -7,6 +7,6 @@ describe('isReal(String', () => {
     expect(isRealString('    ')).toBe(false);
   });
   it('should detect full string', () => {
-    expect(isRealString('Hi')).toBe(true);
+    expect(isRealString('  Hi  ')).toBe(true);
   });
 });

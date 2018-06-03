@@ -21,13 +21,22 @@ socket.on('connect', function () {
       alert(err);
       window.location.href = '/';
     } else {
-
+      console.log('user could not log in');
     }
   });
 });
 
 socket.on('disconnect', function () {
   console.log('client connection lost ...');
+});
+
+socket.on('updateUserList', function (users) {
+  console.log('users', users);
+  let ol = jQuery('<ol></ol>');
+  users.forEach(element => {
+    ol.append(jQuery('<li></li>').text(element));
+  });
+  jQuery("#users").html(ol);
 });
 
 socket.on('newLocationMessage', function (message) {
